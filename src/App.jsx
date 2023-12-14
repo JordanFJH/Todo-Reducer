@@ -1,19 +1,26 @@
 import "./App.css";
 import { useState, useReducer } from "react";
 import TodoList from "./components/TodoList";
-
 import reducer from './reducer'
+import { useDispatch, useSelector  } from "react-redux";
+import { addTodo } from "./todoSlice";
+
 
 // let key = import.meta.env.VITE_KEY
 
 export default function App() {
 
-  let [todos, dispatch] = useReducer(reducer, []);
-  let [input, setInput] = useState("");
-  let [listType, setListType] = useState("all");
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+  // console.log(test);
+
+  // const [todos, dispatch] = useReducer(reducer, []);
+  const [input, setInput] = useState("");
+  const [listType, setListType] = useState("all");
 
   function addToList() {
-    dispatch({ type: 'ADD_TODO', payload: input })
+    dispatch(addTodo(input));
+    // dispatch({ type: 'ADD_TODO', payload: input })
     setInput("");
   }
 
@@ -41,10 +48,10 @@ export default function App() {
       <h1>Todos ({listType})</h1>
 
       <TodoList
-        todos={todos}
+        // todos={todos}
         listType={listType}
-        completeTodo={completeTodo}
-        deleteTodo={deleteTodo}
+        // completeTodo={completeTodo}
+        // deleteTodo={deleteTodo}
       />
 
       <input value={input} onChange={handleChange} />

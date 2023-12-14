@@ -1,7 +1,5 @@
 export default function reducer(state, action) {
   let newTodos;
-  console.log(action);
-  console.log(action.payload);
   switch (action.type) {
     case "ADD_TODO":
       let item = {
